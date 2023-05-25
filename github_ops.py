@@ -14,12 +14,20 @@ except (FileNotFoundError, KeyError):
 
 g = Github(GITHUB_ACCESS_TOKEN)
 
+def get_jira_ticket_id(pr_id: int):
+    repo = g.get_repo(GITHUB_REPO)
+    pr = repo.get_pull(pr_id)
+    return pr.title.split(']')[0].strip("[")
+
 def get_pr_diff(pr_id: int):
     repo = g.get_repo(GITHUB_REPO)
     diff_url = repo.get_pull(pr_id).diff_url
     return requests.get(diff_url, auth=(GITHUB_USERNAME,GITHUB_ACCESS_TOKEN)).text
 
 # Test driven development 😂
+ticket_id = get_jira_ticket_id(1)
+assert ticket_id == "RAH-1"
+
 diff = get_pr_diff(1)
 assert diff == '''diff --git a/Dummy b/Dummy
 new file mode 100644
