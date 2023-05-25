@@ -19,8 +19,8 @@ def get_jira_data(issue_id: str):
     issue = jira.issue(issue_id)
     return issue.fields.summary, issue.fields.description
 
-
-# Test driven development 😂
-title, description = get_jira_data("RAH-1")
-assert title == "Test Task"
-assert description == "This is a test Task"
+if __name__ == "__main__":
+    # Test driven development 😂
+    title, description = get_jira_data("RAH-1")
+    assert title == "Test Task"
+    assert description == "This is a test Task"

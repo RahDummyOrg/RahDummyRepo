@@ -24,16 +24,18 @@ def get_pr_diff(pr_id: int):
     diff_url = repo.get_pull(pr_id).diff_url
     return requests.get(diff_url, auth=(GITHUB_USERNAME,GITHUB_ACCESS_TOKEN)).text
 
-# Test driven development 😂
-ticket_id = get_jira_ticket_id(1)
-assert ticket_id == "RAH-1"
 
-diff = get_pr_diff(1)
-assert diff == '''diff --git a/Dummy b/Dummy
-new file mode 100644
-index 0000000..ff24143
---- /dev/null
-+++ b/Dummy
-@@ -0,0 +1 @@
-+This is a dummy file!
-'''
+if __name__ == "__main__":
+    # Test driven development 😂
+    ticket_id = get_jira_ticket_id(1)
+    assert ticket_id == "RAH-1"
+
+    diff = get_pr_diff(1)
+    assert diff == '''diff --git a/Dummy b/Dummy
+    new file mode 100644
+    index 0000000..ff24143
+    --- /dev/null
+    +++ b/Dummy
+    @@ -0,0 +1 @@
+    +This is a dummy file!
+    '''
