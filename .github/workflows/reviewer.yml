@@ -4,9 +4,9 @@ on:
   pull_request:
 
 jobs:
-  build:
+  review:
     runs-on: ubuntu-latest
-
+    permissions: write-all # Required for commenting on PRs
     steps:
       - uses: actions/checkout@v3
 
@@ -41,8 +41,8 @@ jobs:
           JIRA_SERVER: ${{ secrets.JIRA_SERVER }}
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
         run: |
-          REVIEW=$(python .github/scripts/run_reviewer.py)
-          echo "::set-output name=review::${REVIEW}"
+          REVIEW=$(python run_reviewer.py)
+          echo "review=${REVIEW}" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: actions/github-script@v4
