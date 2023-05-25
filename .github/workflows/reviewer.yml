@@ -42,7 +42,10 @@ jobs:
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
         run: |
           REVIEW=$(python .github/scripts/run_reviewer.py)
-          echo "review=${REVIEW}" >> $GITHUB_OUTPUT
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "review<<$EOF" >> $GITHUB_OUTPUT
+          echo "$REVIEW" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: actions/github-script@v4
