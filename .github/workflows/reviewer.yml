@@ -51,12 +51,7 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-            let review = ``
-            try {
-              review = `${{ steps.get-review.outputs.review }}`
-            } catch (error) {
-              console.log('Failed to parse review output', error)
-            }
+            let review = `${{ steps.review.outputs.review }}`
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
