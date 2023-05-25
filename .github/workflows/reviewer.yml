@@ -41,7 +41,7 @@ jobs:
           JIRA_SERVER: ${{ secrets.JIRA_SERVER }}
           OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
         run: |
-          REVIEW=$(python run_reviewer.py)
+          REVIEW=$(python .github/scripts/run_reviewer.py)
           echo "review=${REVIEW}" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
