@@ -34,4 +34,4 @@ chat_completion = openai.ChatCompletion.create(
 )
 
 # Print the review (This will be captured by the action and posted as a comment on the PR)
-print(chat_completion.choices[0].message.content)
+print(chat_completion.choices[0].message.content.replace('`', '&#96;'))
